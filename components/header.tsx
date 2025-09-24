@@ -34,15 +34,15 @@ export default function Header() {
               <Image src="/Logo_Lyc.png" alt="Лицей Ақбөбек" fill className="object-contain" />
             </div>
             <div>
-              <span className={`font-bold text-xl ${isScrolled ? "text-blue-600" : "text-white"}`}>Ақбөбек</span>
+              <span className={`font-bold text-xl ${isScrolled ? "text-[#59007A]" : "text-white"}`}>Ақбөбек</span>
               <span className={`block text-xs ${isScrolled ? "text-gray-600" : "text-gray-200"}`}>Лицей</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
-            <NavLink href="#about" label="О Лицее" isScrolled={isScrolled} />
-            <NavLink href="#programs" label="Программы" isScrolled={isScrolled} />
+            <NavLink href="#about" label="Лицей туралы" isScrolled={isScrolled} />
+            <NavLink href="#programs" label="Білім Беру" isScrolled={isScrolled} />
             <NavLink href="#teachers" label="Преподаватели" isScrolled={isScrolled} />
             <NavLink href="#admission" label="Поступление" isScrolled={isScrolled} />
             <NavLink href="#campus" label="Кампус" isScrolled={isScrolled} />
@@ -52,7 +52,7 @@ export default function Header() {
             <Link
               href="#admission"
               className={`ml-2 px-4 py-2 rounded-md font-medium transition-colors ${
-                isScrolled ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-white text-blue-600 hover:bg-gray-100"
+                isScrolled ? "bg-[#59007A] text-white hover:bg-[#FF9C2E]" : "bg-white text-[#59007A] hover:bg-gray-100"
               }`}
             >
               Поступить

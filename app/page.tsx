@@ -1,6 +1,41 @@
+"use client";
+
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronRight, Phone, Mail, MapPin, Clock } from "lucide-react"
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
+
+export function BackgroundSlider() {
+  const images = ["background1.jpg", "background2.jpg", "background3.jpg", "background4.jpg", "background5.jpg"];
+  return (
+    <div className="absolute inset-0 z-0">
+      <Swiper
+        modules={[Autoplay, EffectFade]}
+        effect="fade"
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        loop={true}
+        speed={1000}
+        className="h-full w-full"
+      >
+        {images.map((src, idx) => (
+          <SwiperSlide key={idx}>
+            <Image
+              src={src}
+              alt={`Background ${idx}`}
+              fill
+              className="object-cover brightness-50"
+              priority
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+}
+
 
 export default function Home() {
   return (
@@ -8,25 +43,26 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center">
         <div className="absolute inset-0 z-0">
-          <Image src="/background.jpg" alt="Лицей Ақбөбек" fill className="object-cover brightness-50" priority />
+          <BackgroundSlider />
+          {/* <Image src={images[currentIndex]} alt="Лицей Ақбөбек" fill className="object-cover brightness-50" priority /> */}
         </div>
         <div className="container mx-auto px-4 z-10 text-white">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">Aqbobek Lyceum</h1>
           <p className="text-xl md:text-2xl mb-8 max-w-2xl">
-            Углублённое обучение математике, английскому и информатике в формате проектного обучения
+            Батыс өңірінде теңдесі жоқ, дарынды балаларға арналған IT бағытындағы лицей-интернат
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="#admission"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium text-lg transition-colors flex items-center justify-center"
+              className="bg-[#59007A] hover:bg-[#FF9C2E] text-white px-6 py-3 rounded-md font-medium text-lg transition-colors flex items-center justify-center"
             >
-              Поступить в Лицей <ChevronRight className="ml-2 h-5 w-5" />
+              Лицейге қабылдау <ChevronRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
               href="#about"
-              className="bg-white hover:bg-gray-100 text-blue-600 px-6 py-3 rounded-md font-medium text-lg transition-colors flex items-center justify-center"
+              className="bg-white hover:bg-gray-100 text-[#59007A] px-6 py-3 rounded-md font-medium text-lg transition-colors flex items-center justify-center"
             >
-              Узнать больше
+              Толық ақпарат
             </Link>
           </div>
         </div>
@@ -36,40 +72,55 @@ export default function Home() {
       <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">О Лицее</h2>
-            <div className="h-1 w-20 bg-blue-600 mx-auto"></div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Лицей туралы</h2>
+            <div className="h-1 w-20 bg-[#59007A] mx-auto"></div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Миссия и Ценности</h3>
-              <p className="text-gray-700 mb-6">
-                Наша миссия — воспитать новое поколение лидеров, обладающих глубокими знаниями в математике, информатике
-                и английском языке. Мы стремимся создать образовательную среду, где каждый ученик может раскрыть свой
-                потенциал через проектное обучение и индивидуальный подход.
-              </p>
-
-              <h3 className="text-2xl font-semibold mb-4">Почему "Ақбөбек"?</h3>
+              <h3 className="text-2xl font-semibold mb-4">Mission | Vision | Values</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                <li>Углублённое изучение математики, английского и информатики</li>
-                <li>Проектное обучение с практическим применением знаний</li>
-                <li>Индивидуальный подход к каждому ученику</li>
-                <li>Современный кампус с комфортными условиями проживания</li>
-                <li>Высококвалифицированные преподаватели</li>
+                <li><b>Mission:</b> Цифрлық дәуірде жаңалықтар ашуға шабыт береміз</li>
+                <li><b>Vision:</b> Цифрлық технологиялар арқылы білім беретін “Үлкен әлеует” мектебі боламыз</li>
+                <li><b>Values:</b> Сенім. Ұйымшылдық. Құрмет. Жауапкершілік. Адалдық. Табандылық. Ашықтық.</li>
               </ul>
-            </div>
+              <br/><br/>
+              <h3 className="text-2xl font-semibold mb-4">Не үшін «Ақбөбек» лицейі?</h3>
+              <p className="text-gray-700 mb-4">
+                «Ақбөбек» лицейі — заманауи білім беру талаптарына толықтай сай, оқушы 
+                тұлғасының жан-жақты дамуына жағдай жасайтын білім ордасы. Біз сапалы 
+                білім берумен қатар, әр баланың дарыны мен қабілетін ашуға бағытталған 
+                жеке тәсілді ұстанамыз.
+              </p>
+              <ul className="list-disc pl-5 text-gray-700 space-y-2">
+                <li>Жоғары білім сапасы: пәндерді тереңдетіп оқыту, тәжірибелі ұстаздар құрамы және үздік білім беру әдістемелері</li>
+                <li>Цифрлық орта: заманауи технологиялар мен интерактивті платформаларды қолдану арқылы білім беру үрдісі тиімді және қызықты өтеді</li>
+                <li>Дарынды балаларды қолдау: олимпиадаларға, ғылыми жобаларға қатысуға бағытталған арнайы бағдарламалар</li>
+                <li>Қауіпсіз және қолайлы орта: оқушылардың денсаулығы мен қауіпсіздігі басты назарда</li>
+                <li>Тәрбиелеу мен құндылықтар: білім мен тәрбиені ұштастыра отырып, ұлттық рухы биік, жан-жақты тұлға қалыптастыру</li>
+              </ul>
+              <p className="text-gray-700 mb-4">
+              «Ақбөбек» лицейі — балаңыздың табысты болашағының кепілі! Бізбен бірге білім әлеміне сенімді қадам жасаңыз!
+              </p>
+            </div> 
 
             <div className="bg-gray-100 p-6 rounded-lg">
               <div className="aspect-video relative mb-6 rounded-lg overflow-hidden">
-                <Image src="/Director.JPG" alt="Директор лицея" fill className="object-cover" />
+                <Image src="/final.jpg" alt="Директор лицея" fill className="object-cover" />
               </div>
-              <h3 className="text-2xl font-semibold mb-2">Обращение Директора</h3>
-              <p className="text-gray-700 mb-4">
-                "В Лицее 'Ақбөбек' мы создаем не просто образовательное учреждение, а сообщество увлеченных знаниями
-                людей. Наша цель — помочь каждому ученику найти свой путь в жизни и получить необходимые навыки для
-                успеха в современном мире."
+              <h3 className="text-2xl font-semibold mb-3">Директордың Үндеуі</h3>
+              <p className="text-gray-700">Құрметті ата-аналар мен қымбатты оқушылар, «Aqbobek Lyceum» ресми сайтына қош келдіңіз!</p>
+              <p className="text-gray-700">
+                Біздің білім беру қауымдастығына қызығушылық танытқандарыңызға қуаныштымыз! 
+                Біздің лицейде әр бала қолдауды сезінеді! Біз әр оқушы үшін сенімділікті арттырып, дамуға мүдделі орта қалыптастырудамыз. 
+                Біздің лицейде математикаға, ағылшын тіліне және ақпараттық технологияларға ерекше назар аударылады, 
+                өйткені біз білім мен болашақтың жоғары білім стандарттарының күшіне сенеміз! 
+                Біз ұлағатты ұстаздарымызбен мақтанамыз!  Шәкірттерт тәрбиелеудегі, батыл және жауапты қадам жасай алатын, 
+                білімді әрі белсенді көшбасшы буынды қалыптастырудағы ізгілікті істерімізді мақтан тұтамыз!
               </p>
-              <p className="font-medium">Директор Лицея "Ақбөбек"</p>
+              <p className="text-gray-700 mb-4">Ерекше зейіндеріңізге зор  рақмет! Жақын арада кездесетінімізге үмітіміз зор!</p>
+              <p className="font-medium">Үлкен құрметпен, Боранғали Д. Қ.</p>
+              <p className="font-medium">«Aqbobek Lyceum» директоры </p>
             </div>
           </div>
         </div>
@@ -79,8 +130,8 @@ export default function Home() {
       <section id="programs" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Учебные Программы</h2>
-            <div className="h-1 w-20 bg-blue-600 mx-auto"></div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Білім Беру</h2>
+            <div className="h-1 w-20 bg-[#59007A] mx-auto"></div>
             <p className="mt-4 text-gray-700 max-w-3xl mx-auto">
               Наши образовательные программы разработаны для учеников 7-11 классов и направлены на углубленное изучение
               ключевых предметов с акцентом на практическое применение знаний.
@@ -88,12 +139,11 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Core Subjects */}
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+              <div className="h-16 w-16 bg-[#C574E4] rounded-full flex items-center justify-center mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-blue-600"
+                  className="h-8 w-8 text-[#59007A]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -106,116 +156,124 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Основные предметы</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>
-                    <strong>Математика:</strong> углубленное изучение алгебры, геометрии и математического анализа
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>
-                    <strong>Английский язык:</strong> интенсивная программа с носителями языка
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>
-                    <strong>Информатика:</strong> программирование, алгоритмы, веб-разработка
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Additional Activities */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-blue-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Дополнительные направления</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>
-                    <strong>Робототехника:</strong> конструирование и программирование роботов
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>
-                    <strong>Олимпиадная подготовка:</strong> решение нестандартных задач
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>
-                    <strong>Дебаты:</strong> развитие критического мышления и ораторского искусства
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>
-                    <strong>Шахматы:</strong> стратегическое мышление и логика
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Project Learning */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-blue-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Проектное Обучение</h3>
-              <p className="text-gray-700 mb-4">
-                Ученики работают над реальными проектами, применяя полученные знания на практике:
+              <h3 className="text-xl font-semibold mb-3">Орта Мектеп (7-9 сынып)</h3>
+              <p className="mt-4 mb-4 text-gray-700 max-w-3xl mx-auto">
+                Орта буын оқушылары білім берудің мемлекеттік бағдарламасы бойынша оқиды. 
+                Бұл бағдарлама оқушылардың жан-жақты дамуына және базалық білім алуға бағытталған. 
+                Негізгі оқу бағдарламасына қоса, сабақ кестесіне төмендегі қосымша сағаттар енгізілген: 
               </p>
               <ul className="space-y-2 text-gray-700">
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Разработка мобильных приложений</span>
+                  <span className="text-[#59007A] mr-2">•</span>
+                  <span>
+                    <strong>Ағылшын тілі:</strong> аптасына 2 сағат
+                  </span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Исследовательские работы</span>
+                  <span className="text-[#59007A] mr-2">•</span>
+                  <span>
+                    <strong>Математика:</strong> аптасына 2 сағат
+                  </span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Социальные и экологические проекты</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Бизнес-планирование</span>
+                  <span className="text-[#59007A] mr-2">•</span>
+                  <span>
+                    <strong>Информатика:</strong> аптасына 1 сағат 
+                  </span>
                 </li>
               </ul>
+              <p className="mt-4 text-gray-700 max-w-3xl mx-auto">
+                Аталған пәндер арқылы оқушылар IT саласымен ерте танысып, логикалық ойлау және практикалық дағдыларды меңгереді. 
+                Жобалық сабақтарда оқушылар командамен жұмыс істеуді, креативті ойлауды және өз идеяларын іске асыруды үйренеді. 
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="h-16 w-16 bg-[#C574E4] rounded-full flex items-center justify-center mb-4">      
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8 text-[#59007A]"
+                  fill="none"
+                  viewBox="0 0 16 16"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M14.25 9.25V6L8 2.75L1.75 6L8 9.25l3.25-1.5v3.5c0 1-1.5 2-3.25 2s-3.25-1-3.25-2v-3.5"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Жоғары Мектеп (10-11 сынып)</h3>
+              <p className="mt-4 text-gray-700 max-w-3xl mb-4 mx-auto">
+                Жоғары сынып оқушыларына арналған оқу бағдарламасы олардың кәсіби және академиялық бағдарын нақтылап, болашаққа мақсатты түрде дайындалуына мүмкіндік береді. 
+                Бағдарлама мазмұны қазіргі заман талабына сай құрылып, оқушылардың жан-жақты дамуын көздейді. 
+              </p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-[#59007A] mr-2">•</span>
+                  <span>
+                    <strong>ҰБТ-ге жүйелі дайындық:</strong> Оқушылар өз таңдауы бойынша бейіндік пәндерді тереңдетіп оқиды. 
+                    Апталық кестеге ҰБТ-ге бағытталған арнайы сабақтар енгізілген. 
+                    Сабақтарда: Тест стратегияларын меңгеру, Уақытың тиімді басқару әдістері, Практикалық сынақ тесттер ұйымдастырылады.
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#59007A] mr-2">•</span>
+                  <span>
+                    <strong>IELTS, SAT халықаралық емтихандарға дайындық:</strong> Мектеп бағдарламасы халықаралық стандарттарға бейімделген. 
+                    Тілге қабілеті жоғары оқушылар үшін: IELTS, SAT секілді халықаралық емтихандарға бағытталған курстар өткізіледі, 
+                    Академиялық ағылшын тілі тереңдетіліп оқытылады, Motivational letter жазуға назар аударылады.
+                  </span>
+                </li>
+                {/* <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span>
+                    <strong>Психолог сағаты — аптасына 1 рет:</strong> Әр аптада оқушылар мектеп психологымен жеке және топтық жұмыс жүргізеді. 
+                    Бұл сабақтардың мақсаты: Эмоционалды тұрақтылықты сақтау, Стресспен күрес тәсілдерін үйрету, Өзін-өзі тану мен сенімділікті арттыру,
+                    Кәсіптік бағдар беру.
+                  </span>
+                </li> */}
+              </ul>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="h-16 w-16 bg-[#C574E4] rounded-full flex items-center justify-center mb-4">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-8 w-8"
+                viewBox="0 0 24 24">
+                <path  
+                  fill="#59007A"   
+                  fill-rule="evenodd" 
+                  clip-rule="evenodd"
+                  d="M12 3a2 2 0 0 0-1 3.732V8H8c-3.2 0-4 2.667-4 4v7c0 .667.4 2 2 2h1v-4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v4h1c1.6 0 2-1.333 2-2v-7c0-3.2-2.667-4-4-4h-3V6.732A2 2 0 0 0 12 3m3 18v-3h-2v3zm-4 0v-3H9v3zm10-3v-5c.667 0 2 .4 2 2v1c0 .667-.4 2-2 2M3 13v5c-1.6 0-2-1.333-2-2v-1c0-1.6 1.333-2 2-2m6-1a1 1 0 1 0 0 2h.001a1 1 0 1 0 0-2zm5 1a1 1 0 0 1 1-1h.001a1 1 0 1 1 0 2H15a1 1 0 0 1-1-1"
+                />
+              </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Үйірмелер мен Бірлестіктер</h3>
+              <p className="text-gray-700 mb-4">
+                "Ақбөбек" лицейі оқушыларға заман талабына сай білім мен тәжірибе алуға ерекше жағдай жасайды. 
+                Бүгінгі таңда лицейімізде IT бағытында келесі 3 тегін үйірмеге тіркелу мүмкіндігі бар: 
+              </p>
+              <ul className="space-y-2 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span><strong>Web-бағдарламалау</strong> – Оқушылар HTML, CSS және JavaScript негіздерін меңгеріп, өздерінің алғашқы веб-сайттарын жасайды.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span><strong>Arduino</strong> – Робототехника және электроника саласына қызығатындар үшін таптырмас орта. Оқушылар датчиктер мен микроконтроллерлерді қолдана отырып, түрлі жобалар жасайды.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span><strong>3D-модельдеу</strong> – Заманауи графикамен жұмыс істеуді, үш өлшемді нысандарды жобалап, оларды 3D-принтерде басып шығаруды үйренеді.</span>
+                </li>
+              </ul>
+              <p className="text-gray-700 mb-4">
+                Бұдан бөлек, лицейде шығармашылық пен әлеуметтік белсенділікке арналған 🎨Art Club және 🤝“Şyraq” волонтерлар қозғалысы жұмыс істейді.
+              </p>
             </div>
           </div>
         </div>
@@ -237,13 +295,13 @@ export default function Home() {
             {/* Teacher 1 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
               <div className="aspect-square relative">
-                <Image src="/images/teacher1.jpg" alt="Преподаватель математики" fill className="object-cover" />
+                <Image src="/final.jpg" alt="Преподаватель математики" fill className="object-cover" />
               </div>
               <div className="p-4">
-                <h3 className="text-xl font-semibold mb-1">Алексей Иванов</h3>
-                <p className="text-blue-600 mb-2">Преподаватель математики</p>
+                <h3 className="text-xl font-semibold mb-1">Боранғали Даулет Қанатұлы</h3>
+                <p className="text-blue-600 mb-2">Лицей директоры</p>
                 <p className="text-gray-700 text-sm">
-                  Кандидат физико-математических наук, победитель международных олимпиад
+                  Байланыс түрлері: почта - borangali_daulet@akbobek.kz, телефон номері - 8-778-455-65-97
                 </p>
               </div>
             </div>
@@ -254,10 +312,10 @@ export default function Home() {
                 <Image src="/images/teacher2.jpg" alt="Преподаватель английского языка" fill className="object-cover" />
               </div>
               <div className="p-4">
-                <h3 className="text-xl font-semibold mb-1">Елена Смирнова</h3>
-                <p className="text-blue-600 mb-2">Преподаватель английского языка</p>
+                <h3 className="text-xl font-semibold mb-1">Бозшин Бекболат Қанатұлы</h3>
+                <p className="text-blue-600 mb-2">Лицей директорының оқу ісі жөніндегі орынбасары</p>
                 <p className="text-gray-700 text-sm">
-                  Магистр лингвистики, 10 лет опыта преподавания, сертификат CELTA
+                  Байланыс түрлері: почта - bozshin_bekbolat@akbobek.kz, телефон номері - 8-702-940-48-71
                 </p>
               </div>
             </div>
@@ -268,24 +326,24 @@ export default function Home() {
                 <Image src="/images/teacher3.jpg" alt="Преподаватель информатики" fill className="object-cover" />
               </div>
               <div className="p-4">
-                <h3 className="text-xl font-semibold mb-1">Марат Ахметов</h3>
-                <p className="text-blue-600 mb-2">Преподаватель информатики</p>
+                <h3 className="text-xl font-semibold mb-1">Қайдасов Жасұлан Нұрланұлы</h3>
+                <p className="text-blue-600 mb-2">Лицей директорының тәрбие ісі жөніндегі орынбасары</p>
                 <p className="text-gray-700 text-sm">
-                  Разработчик ПО с 15-летним стажем, автор учебных пособий по программированию
+                  Байланыс түрлері: почта - kaydasov_zhasulan@akbobek.kz, телефон номері - 8-707-681-88-61
                 </p>
               </div>
             </div>
 
-            {/* Curator */}
+            {/* Teacher 4 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
               <div className="aspect-square relative">
-                <Image src="/images/curator.jpg" alt="Куратор" fill className="object-cover" />
+                <Image src="/SP.jpg" alt="Куратор" fill className="object-cover" />
               </div>
               <div className="p-4">
-                <h3 className="text-xl font-semibold mb-1">Айгуль Нурланова</h3>
-                <p className="text-blue-600 mb-2">Куратор</p>
+                <h3 className="text-xl font-semibold mb-1">Ахметова Салтанат Паналиевна</h3>
+                <p className="text-blue-600 mb-2">Лицей директорының ғылыми-әдістемелік жұмыстар жөніндегі орынбасары</p>
                 <p className="text-gray-700 text-sm">
-                  Психолог-педагог, сопровождает учеников в учебе и внеурочной деятельности
+                  Байланыс түрлері: почта - akhmetova_s@akbobek.kz, телефон номері - 8-771-361-66-44
                 </p>
               </div>
             </div>

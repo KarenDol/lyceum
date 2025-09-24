@@ -8,10 +8,9 @@ import Footer from "@/components/footer"
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
 export const metadata: Metadata = {
-  title: 'Лицей "Ақбөбек" - Углубленное обучение математике, английскому и информатике',
+  title: 'Aqbobek Lyceum',
   description:
     'Лицей "Ақбөбек" предлагает углубленное обучение математике, английскому языку и информатике в формате проектного обучения для учеников 7-11 классов.',
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
